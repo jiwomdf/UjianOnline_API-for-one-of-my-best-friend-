@@ -55,6 +55,68 @@ router.post('/', async function (req, res) {
     }
 })
 
+/* Update dosen */
+router.patch('/:id', async function (req, res) {
+
+    try {
+        const {
+            dosenID,
+            password,
+            nrp,
+            nama,
+            email,
+            telp,
+            alamat,
+            dosenUrlPhoto
+          } = req.body;
+
+        const retVal = await model.MsDosen.update({
+            dosenID : req.body.dosenID? req.body.dosenID : dosenID,
+            password : req.body.password? req.body.password : password,
+            nrp : req.body.nrp? req.body.nrp : nrp,
+            nama : req.body.nama? req.body.nama : nama,
+            email : req.body.email? req.body.email : email,
+            telp : req.body.telp? req.body.telp : telp,
+            alamat : req.body.alamat? req.body.alamat : alamat,
+            dosenUrlPhoto : req.body.dosenUrlPhoto? req.body.dosenUrlPhoto : dosenUrlPhoto
+        },{
+            where: {
+                id: req.params.id
+            }
+        })
+        
+        if (retVal) 
+            success200(res,retVal)
+        else
+            failed404(res)
+    } 
+    catch (err) {
+      error400(res,err)
+    }
+    
+})
+
+router.delete('/:id', async function(req,res){
+
+    try {
+        const retVal = await model.MsDosen.destroy({ 
+            where: {
+                id: req.params.id
+            }
+        })
+
+        if (retVal) 
+            success200(res,retVal)
+        else
+            failed404(res)
+
+    } 
+    catch (err) {
+      error400(res,err)
+    }
+
+})
+
 
 function success200(res,retVal){
     res.status(200).json({
