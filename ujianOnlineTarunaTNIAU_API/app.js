@@ -5,8 +5,11 @@ let cookieParser = require('cookie-parser')
 let logger = require('morgan')
 
 let indexRouter = require('./routes/index')
-let usersRouter = require('./routes/users')
 let dosenRouter = require('./routes/dosen')
+let pilihangandaRouter = require('./routes/pilihanganda')
+let soalRouter = require('./routes/soal')
+let tarunaRouter = require('./routes/taruna')
+let ujianRouter = require('./routes/ujian')
 
 let app = express()
 
@@ -21,8 +24,12 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
-app.use('/users', usersRouter)
 app.use('/dosen', dosenRouter)
+app.use('/pilihanganda', pilihangandaRouter)
+app.use('/soal', soalRouter)
+app.use('/taruna', tarunaRouter)
+app.use('/ujian', ujianRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
