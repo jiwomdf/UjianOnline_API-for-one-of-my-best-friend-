@@ -3,6 +3,7 @@ let express = require('express')
 let path = require('path')
 let cookieParser = require('cookie-parser')
 let logger = require('morgan')
+let cors = require('cors')
 
 let indexRouter = require('./routes/index')
 let dosenRouter = require('./routes/dosen')
@@ -12,6 +13,9 @@ let tarunaRouter = require('./routes/taruna')
 let ujianRouter = require('./routes/ujian')
 
 let app = express()
+
+// enable all cors policy
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))

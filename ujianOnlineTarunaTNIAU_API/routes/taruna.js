@@ -19,6 +19,47 @@ router.get('/', async function (req, res) {
     }
 })
 
+/* GET specific Taruna. */
+router.get('/:id', async function (req, res) {
+
+    try {
+        const retVal = await model.MsTaruna.findAll({
+            where: {
+                tarunaID: req.params.id
+            }
+        })
+        
+        if (retVal.length !== 0) 
+            success200(res,retVal)
+        else
+            failed404(res)
+    } 
+    catch (err) {
+      error400(res,err)
+    }
+})
+
+/* Login Taruna. */
+router.post('/login', async function (req, res) {
+
+    try {
+        const retVal = await model.MsTaruna.findAll({
+            where: {
+                tarunaID: req.body.tarunaID,
+                password: req.body.password
+            }
+        })
+        
+        if (retVal.length !== 0) 
+            success200(res,retVal)
+        else
+            failed404(res)
+    } 
+    catch (err) {
+      error400(res,err)
+    }
+})
+
 /* POST Taruna */
 router.post('/', async function (req, res) {
 
