@@ -11,6 +11,7 @@ let pilihangandaRouter = require('./routes/pilihanganda')
 let soalRouter = require('./routes/soal')
 let tarunaRouter = require('./routes/taruna')
 let ujianRouter = require('./routes/ujian')
+let crudExamRouter = require('./routes/crudExam')
 
 let app = express()
 
@@ -33,6 +34,7 @@ app.use('/pilihanganda', pilihangandaRouter)
 app.use('/soal', soalRouter)
 app.use('/taruna', tarunaRouter)
 app.use('/ujian', ujianRouter)
+app.use('/crudExam',crudExamRouter)
 
 
 // catch 404 and forward to error handler
