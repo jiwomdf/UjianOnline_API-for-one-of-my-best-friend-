@@ -3,7 +3,7 @@ let model = require('../models/index')
 let router = express.Router()
 
 
-/* GET all Taruna. */
+/* GET all Ujian. */
 router.get('/', async function (req, res) {
 
     try {
@@ -19,7 +19,7 @@ router.get('/', async function (req, res) {
     }
 })
 
-/* POST Taruna */
+/* POST Ujian */
 router.post('/', async function (req, res) {
 
     try {
@@ -45,7 +45,7 @@ router.post('/', async function (req, res) {
     }
 })
 
-/* Update Taruna */
+/* Update Ujian */
 router.patch('/:id', async function (req, res) {
 
     try {
@@ -74,7 +74,7 @@ router.patch('/:id', async function (req, res) {
     
 })
 
-/* Delete Taruna */
+/* Delete Ujian */
 router.delete('/:id', async function(req,res){
 
     try {
