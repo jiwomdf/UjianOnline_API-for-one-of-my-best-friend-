@@ -1,31 +1,49 @@
 let express = require('express')
 let router = express.Router()
-let request = require('request');
 
+let ujian = require('../routes/ujian')
+let soal = require('../routes/soal')
+let pilihanGanda = require('../routes/pilihanganda')
 
 /* POST Soal */
 router.post('/', async function (req, res) {
 
     try {
-        const retVal = {
-            questions:[
-                {
-                    examQuestion,
-                    answeres:[
-                        {
-                            examAnswere
-                        }
-                    ]
-                }
-            ]
-          } = req.body;
+        let retVal = 
+            {
+                examName,
+                questions:[
+                    {
+                        examQuestion,
+                        soalUrlImage,
+                        answeres:[
+                            {
+                                pilihanGandaName,
+                                pilihanGandaIsTrue
+                            }
+                        ]
+                    }
+                ]
+            } = req.body;
 
         
         /* lOGIC */
+        //ujian.insertMsUjian({"ujianName":retVal.examName})  // insert MsExam
+        //console.log(retVal.questions)
         retVal.questions.forEach(x => {
+
+            // soal.insertSoal({
+            //     "soalName": x.examQuestion,
+            //     "soalUrlImage": x.soalUrlImage
+            // })
             
-            console.log(x.examQuestion) // insert MsQuestion
-            console.log(x.answeres[0].examAnswere) // insert MsAnswere
+            x.answeres.forEach(y =>{
+
+                // pilihanGanda.insertPilihanGanda({
+                //     "pilihanGandaName": y.pilihanGandaName,
+                //     "pilihanGandaIsTrue": y.pilihanGandaIsTrue
+                // })
+            })
             
         });
         
@@ -36,6 +54,5 @@ router.post('/', async function (req, res) {
 
 
 })
-
 
 module.exports = router

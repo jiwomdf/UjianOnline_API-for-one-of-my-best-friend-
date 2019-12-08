@@ -2,7 +2,7 @@ let express = require('express')
 let model = require('../models/index')
 let router = express.Router()
 
-
+/* Direct API */
 /* GET all Soal. */
 router.get('/', async function (req, res) {
 
@@ -25,12 +25,14 @@ router.post('/', async function (req, res) {
     try {
         const {
             soalName,
-            pilihanGandaAnswere
+            pilihanGandaAnswere,
+            soalUrlImage
           } = req.body;
 
         const retVal = await model.MsSoal.create({
             soalName,
-            pilihanGandaAnswere
+            pilihanGandaAnswere,
+            soalUrlImage
         })
         
         if (retVal) 
@@ -41,6 +43,7 @@ router.post('/', async function (req, res) {
     catch (err) {
       error400(res,err)
     }
+
 })
 
 /* Update Soal */
@@ -49,12 +52,14 @@ router.patch('/:id', async function (req, res) {
     try {
         const {
             soalName,
-            pilihanGandaAnswere
+            pilihanGandaAnswere,
+            soalUrlImage
           } = req.body;
 
         const retVal = await model.MsSoal.update({
             soalName : req.body.soalName? req.body.soalName : soalName,
-            pilihanGandaAnswere : req.body.pilihanGandaAnswere? req.body.pilihanGandaAnswere : pilihanGandaAnswere
+            pilihanGandaAnswere : req.body.pilihanGandaAnswere? req.body.pilihanGandaAnswere : pilihanGandaAnswere,
+            soalUrlImage: req.body.soalUrlImage? req.body.soalUrlImage: soalUrlImage
         },{
             where: {
                 id: req.params.id
@@ -94,6 +99,30 @@ router.delete('/:id', async function(req,res){
 })
 
 
+/* funtional API */
+const insertSoal = async function(soalParam){
+
+    console.log(soalParam)
+
+    try {
+        const {
+            soalName,
+            soalUrlImage
+          } = soalParam;
+
+        const retVal = await model.MsSoal.create({
+            soalName,
+            soalUrlImage
+        })
+        
+    } 
+    catch (err) {
+      error400(err)
+    }
+
+}
+
+
 function success200(res,retVal){
     res.status(200).json({
         'status': '200',
@@ -119,4 +148,6 @@ function error400(res,err){
     })
 }
 
-module.exports = router
+module.exports = {
+    insertSoal: insertSoal
+}

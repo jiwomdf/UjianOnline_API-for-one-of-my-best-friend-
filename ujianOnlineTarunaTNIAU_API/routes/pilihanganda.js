@@ -93,6 +93,30 @@ router.delete('/:id', async function(req,res){
 
 })
 
+/* funtional API */
+const insertPilihanGanda = async function(pilihanGandaParam){
+
+    console.log(pilihanGandaParam)
+
+    try {
+        const {
+            pilihanGandaName,
+            pilihanGandaIsTrue
+          } = pilihanGandaParam;
+
+        const retVal = await model.MsPilihanGanda.create({
+            pilihanGandaName,
+            pilihanGandaIsTrue
+        })
+        
+        console.log(retVal)
+
+    } 
+    catch (err) {
+      console.log(err)
+    }
+
+}
 
 function success200(res,retVal){
     res.status(200).json({
@@ -119,4 +143,6 @@ function error400(res,err){
     })
 }
 
-module.exports = router
+module.exports = {
+    insertPilihanGanda: insertPilihanGanda
+}

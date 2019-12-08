@@ -2,7 +2,7 @@ let express = require('express')
 let model = require('../models/index')
 let router = express.Router()
 
-
+/* Direct API */
 /* GET all Ujian. */
 router.get('/', async function (req, res) {
 
@@ -24,15 +24,13 @@ router.post('/', async function (req, res) {
 
     try {
         const {
-            ujianName,
-            ujianUrlImage
+            ujianName
         } = req.body
 
         console.log(req.body)
 
         const retVal = await model.MsUjian.create({
-            ujianName,
-            ujianUrlImage
+            ujianName
         })
         
         if (retVal) 
@@ -50,13 +48,11 @@ router.patch('/:id', async function (req, res) {
 
     try {
         const {
-            ujianName,
-            ujianUrlImage
+            ujianName
           } = req.body;
 
         const retVal = await model.MsUjian.update({
-            ujianName : req.body.ujianName? req.body.ujianName : ujianName,
-            ujianUrlImage : req.body.ujianUrlImage? req.body.ujianUrlImage : ujianUrlImage
+            ujianName : req.body.ujianName? req.body.ujianName : ujianName
         },{
             where: {
                 id: req.params.id
@@ -96,6 +92,22 @@ router.delete('/:id', async function(req,res){
 })
 
 
+/* funtional API */
+const insertMsUjian = async function (ujianNameParam){
+    try {
+
+        const {ujianName} = ujianNameParam
+        const retVal = await model.MsUjian.create({
+            ujianName
+        })
+
+        console.log(retVal)
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
 function success200(res,retVal){
     res.status(200).json({
         'status': '200',
@@ -121,4 +133,7 @@ function error400(res,err){
     })
 }
 
-module.exports = router
+
+module.exports = {
+    insertMsUjian: insertMsUjian
+}
