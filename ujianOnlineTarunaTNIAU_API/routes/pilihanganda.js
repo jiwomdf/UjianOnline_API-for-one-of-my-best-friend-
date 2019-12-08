@@ -101,12 +101,14 @@ const insertPilihanGanda = async function(pilihanGandaParam){
     try {
         const {
             pilihanGandaName,
-            pilihanGandaIsTrue
+            pilihanGandaIsTrue,
+            ujianGroup
           } = pilihanGandaParam;
 
         const retVal = await model.MsPilihanGanda.create({
             pilihanGandaName,
-            pilihanGandaIsTrue
+            pilihanGandaIsTrue,
+            ujianGroup
         })
         
         console.log(retVal)

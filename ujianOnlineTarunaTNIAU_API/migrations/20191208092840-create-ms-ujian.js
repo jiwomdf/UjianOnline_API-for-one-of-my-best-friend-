@@ -11,7 +11,7 @@ module.exports = {
       ujianName: {
         type: Sequelize.STRING
       },
-      ujianUrlImage: {
+      ujianGroup: {
         type: Sequelize.STRING
       },
       createdAt: {

@@ -11,7 +11,7 @@ module.exports = {
       soalName: {
         type: Sequelize.STRING
       },
-      pilihanGandaAnswere: {
+      ujianGroup: {
         type: Sequelize.STRING
       },
       createdAt: {

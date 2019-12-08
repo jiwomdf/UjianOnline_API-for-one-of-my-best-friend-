@@ -96,12 +96,13 @@ router.delete('/:id', async function(req,res){
 const insertMsUjian = async function (ujianNameParam){
     try {
 
-        const {ujianName} = ujianNameParam
+        const {ujianName, ujianGroup} = ujianNameParam
         const retVal = await model.MsUjian.create({
-            ujianName
+            ujianName,
+            ujianGroup
         })
 
-        console.log(retVal)
+        console.log(ujianNameParam)
     }
     catch(err){
         console.log(err)

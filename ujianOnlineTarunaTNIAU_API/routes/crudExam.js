@@ -1,5 +1,6 @@
 let express = require('express')
 let router = express.Router()
+const uuidv4 = require('uuid/v4');
 
 let ujian = require('../routes/ujian')
 let soal = require('../routes/soal')
@@ -28,21 +29,29 @@ router.post('/', async function (req, res) {
 
         
         /* lOGIC */
-        //ujian.insertMsUjian({"ujianName":retVal.examName})  // insert MsExam
-        //console.log(retVal.questions)
+        let ujianGroup = retVal.examName + "_" + uuidv4();
+
+        ujian.insertMsUjian({
+            "ujianName":retVal.examName,
+            "ujianGroup":ujianGroup
+        })
+
         retVal.questions.forEach(x => {
 
-            // soal.insertSoal({
-            //     "soalName": x.examQuestion,
-            //     "soalUrlImage": x.soalUrlImage
-            // })
+            soal.insertSoal({
+                "soalName": x.soalName,
+                "soalUrlImage": x.soalUrlImage,
+                "ujianGroup": ujianGroup
+            })
             
             x.answeres.forEach(y =>{
 
-                // pilihanGanda.insertPilihanGanda({
-                //     "pilihanGandaName": y.pilihanGandaName,
-                //     "pilihanGandaIsTrue": y.pilihanGandaIsTrue
-                // })
+                pilihanGanda.insertPilihanGanda({
+                    "pilihanGandaName": y.pilihanGandaName,
+                    "pilihanGandaIsTrue": y.pilihanGandaIsTrue,
+                    "ujianGroup": ujianGroup
+                })
+
             })
             
         });

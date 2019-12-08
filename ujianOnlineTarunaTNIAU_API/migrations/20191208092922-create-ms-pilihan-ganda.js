@@ -14,6 +14,9 @@ module.exports = {
       pilihanGandaIsTrue: {
         type: Sequelize.INTEGER
       },
+      ujianGroup: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

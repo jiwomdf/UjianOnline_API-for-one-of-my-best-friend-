@@ -102,19 +102,22 @@ router.delete('/:id', async function(req,res){
 /* funtional API */
 const insertSoal = async function(soalParam){
 
-    console.log(soalParam)
 
     try {
         const {
             soalName,
-            soalUrlImage
+            soalUrlImage,
+            ujianGroup
           } = soalParam;
 
         const retVal = await model.MsSoal.create({
             soalName,
-            soalUrlImage
+            soalUrlImage,
+            ujianGroup
         })
         
+        console.log(retVal)
+
     } 
     catch (err) {
       error400(err)

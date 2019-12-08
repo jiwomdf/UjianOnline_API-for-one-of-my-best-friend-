@@ -1,12 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const MsTaruna = sequelize.define('MsTaruna', {
-    nama: DataTypes.STRING(255),
-    tarunaID: DataTypes.STRING(255),
-    password: DataTypes.STRING(255),
-    kelas: DataTypes.STRING(255),
-    tarunaUrlImage: DataTypes.STRING(255),
-    email: DataTypes.STRING(255),
+    nama: DataTypes.STRING,
+    tarunaID: DataTypes.STRING,
+    password: DataTypes.STRING,
+    kelas: DataTypes.STRING,
+    tarunaUrlImage: DataTypes.STRING,
+    email: DataTypes.STRING,
     gender: DataTypes.INTEGER
   }, {});
   MsTaruna.associate = function(models) {
