@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const MsPilihanGanda = sequelize.define('MsPilihanGanda', {
     pilihanGandaName: DataTypes.STRING,
     pilihanGandaIsTrue: DataTypes.INTEGER,
-    ujianGroup: DataTypes.STRING
+    ujianGroup: DataTypes.STRING,
+    soalGroup: DataTypes.STRING
   }, {});
   MsPilihanGanda.associate = function(models) {
     // associations can be defined here

@@ -109,6 +109,16 @@ const insertMsUjian = async function (ujianNameParam){
     }
 }
 
+const getMsUjian = async function(){
+
+    console.log("masuk")
+
+    const retVal = await model.MsUjian.findAll({})
+
+    return retVal
+ 
+}
+
 function success200(res,retVal){
     res.status(200).json({
         'status': '200',
@@ -136,5 +146,6 @@ function error400(res,err){
 
 
 module.exports = {
-    insertMsUjian: insertMsUjian
+    insertMsUjian: insertMsUjian,
+    getMsUjian: getMsUjian
 }

@@ -6,7 +6,24 @@ let ujian = require('../routes/ujian')
 let soal = require('../routes/soal')
 let pilihanGanda = require('../routes/pilihanganda')
 
-/* POST Soal */
+/* GET Ujian, Soal, PilihanGanda */
+router.get('/', async function(req,res){
+
+    try{
+
+        const retVal = await ujian.getMsUjian()
+
+        if (retVal.length !== 0) 
+            success200(res,retVal)
+        else
+            failed404(res)
+    } 
+    catch (err) {
+        error400(res,err)
+    }
+})
+
+/* POST Ujian, Soal, PilihanGanda */
 router.post('/', async function (req, res) {
 
     try {
@@ -38,10 +55,13 @@ router.post('/', async function (req, res) {
 
         retVal.questions.forEach(x => {
 
+            let soalGroup = x.soalName + "_" + uuidv4();
+
             soal.insertSoal({
                 "soalName": x.soalName,
                 "soalUrlImage": x.soalUrlImage,
-                "ujianGroup": ujianGroup
+                "ujianGroup": ujianGroup,
+                "soalGroup": soalGroup
             })
             
             x.answeres.forEach(y =>{
@@ -49,14 +69,15 @@ router.post('/', async function (req, res) {
                 pilihanGanda.insertPilihanGanda({
                     "pilihanGandaName": y.pilihanGandaName,
                     "pilihanGandaIsTrue": y.pilihanGandaIsTrue,
-                    "ujianGroup": ujianGroup
+                    "ujianGroup": ujianGroup,
+                    "soalGroup": soalGroup
                 })
 
             })
             
         });
         
-    } 
+    }
     catch (err) {
         console.log(err)
     }
@@ -64,4 +85,30 @@ router.post('/', async function (req, res) {
 
 })
 
+function success200(res,retVal){
+    res.status(200).json({
+        'status': '200',
+        'messages': 'success',
+        'data': retVal
+    })
+}
+
+function failed404(res){
+    res.status(404).json({
+        'status': '404',
+        'messages': 'data not found',
+        'data': {}
+    })
+}
+
+function error400(res,err){
+    console.log(err)
+    res.status(400).json({
+        'status': '400',
+        'messages': err.messages,
+        'data': {}
+    })
+}
+
 module.exports = router
+

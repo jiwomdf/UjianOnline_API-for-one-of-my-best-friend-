@@ -14,6 +14,12 @@ module.exports = {
       ujianGroup: {
         type: Sequelize.STRING
       },
+      soalUrlImage: {
+        type: Sequelize.STRING
+      },
+      soalGroup: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -96,19 +96,20 @@ router.delete('/:id', async function(req,res){
 /* funtional API */
 const insertPilihanGanda = async function(pilihanGandaParam){
 
-    console.log(pilihanGandaParam)
-
     try {
+
         const {
             pilihanGandaName,
             pilihanGandaIsTrue,
-            ujianGroup
+            ujianGroup,
+            soalGroup
           } = pilihanGandaParam;
 
         const retVal = await model.MsPilihanGanda.create({
             pilihanGandaName,
             pilihanGandaIsTrue,
-            ujianGroup
+            ujianGroup,
+            soalGroup
         })
         
         console.log(retVal)
