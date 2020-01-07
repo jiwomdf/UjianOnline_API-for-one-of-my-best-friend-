@@ -111,12 +111,39 @@ const insertMsUjian = async function (ujianNameParam){
 
 const getMsUjian = async function(){
 
-    console.log("masuk")
-
     const retVal = await model.MsUjian.findAll({})
 
-    return retVal
- 
+    return retVal 
+}
+
+const getMsUjianDetail = async function(){
+    
+    const ujian = await model.MsUjian.findAll({})
+    const soal = await model.MsSoal.findAll({})
+    //const pilihanGanda = await model.MsPilihanGanda.findAll({})
+    
+    let ujianData = {}
+
+    ujian.forEach(x => {
+        
+        console.log(x.ujianName)
+
+        soal.forEach(y => {
+
+            if(x.ujianGroup != y.ujianGroup)
+                continue
+
+            
+            
+
+        })
+        
+
+    });
+    
+
+
+    //return retVal 
 }
 
 function success200(res,retVal){
@@ -147,5 +174,6 @@ function error400(res,err){
 
 module.exports = {
     insertMsUjian: insertMsUjian,
-    getMsUjian: getMsUjian
+    getMsUjian: getMsUjian,
+    getMsUjianDetail:getMsUjianDetail
 }

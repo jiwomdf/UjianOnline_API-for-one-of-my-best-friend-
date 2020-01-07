@@ -6,8 +6,8 @@ let ujian = require('../routes/ujian')
 let soal = require('../routes/soal')
 let pilihanGanda = require('../routes/pilihanganda')
 
-/* GET Ujian, Soal, PilihanGanda */
-router.get('/', async function(req,res){
+/* GET Ujian*/
+router.get('/getAllUjian', async function(req,res){
 
     try{
 
@@ -17,10 +17,27 @@ router.get('/', async function(req,res){
             success200(res,retVal)
         else
             failed404(res)
-    } 
+    }
     catch (err) {
         error400(res,err)
     }
+})
+
+router.get('/getAllUjianDetail', async function(req,res){
+
+    try{
+
+        const retVal = await ujian.getMsUjianDetail()
+
+        if (retVal.length !== 0) 
+            success200(res,retVal)
+        else
+            failed404(res)
+    }
+    catch (err) {
+        error400(res,err)
+    }
+    
 })
 
 /* POST Ujian, Soal, PilihanGanda */
