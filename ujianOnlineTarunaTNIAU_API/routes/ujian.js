@@ -120,30 +120,56 @@ const getMsUjianDetail = async function(){
     
     const ujian = await model.MsUjian.findAll({})
     const soal = await model.MsSoal.findAll({})
-    //const pilihanGanda = await model.MsPilihanGanda.findAll({})
+    const pilihanGanda = await model.MsPilihanGanda.findAll({})
     
-    let ujianData = {}
-
+    let listUjian = new Array()
     ujian.forEach(x => {
-        
-        console.log(x.ujianName)
 
+        let  ujianData = {
+            "ujianID": x.id,
+            "ujianName": x.ujianName,
+            "soal": []
+        }
+
+        let newSoalList = new Array()
         soal.forEach(y => {
 
             if(x.ujianGroup != y.ujianGroup)
-                continue
-
+                return
             
+            ujianData.soal = {
+                "soalName": y.soalName,
+                "soalUrlImage": y.soalUrlImage,
+                "pilihanGanda": []
+            }
             
 
+            let newPilihanGandaList = new Array()
+            pilihanGanda.forEach( z =>{
+
+                if(y.soalGroup != z.soalGroup)
+                    return
+
+                    ujianData.soal.pilihanGanda = {
+                    "pilihanGandaName": z.pilihanGandaName,
+                    "pilihanGandaIsTrue": z.pilihanGandaIsTrue
+                }
+
+                newPilihanGandaList.push(ujianData.soal.pilihanGanda)
+            })
+            ujianData.soal.pilihanGanda = newPilihanGandaList
+
+
+            newSoalList.push(ujianData.soal)
         })
+        ujianData.soal = newSoalList
+
         
-
+        listUjian.push(ujianData)
     });
-    
 
 
-    //return retVal 
+    return listUjian 
 }
 
 function success200(res,retVal){
